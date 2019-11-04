@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.squareup.seismic.ShakeDetector
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
 
@@ -16,7 +17,12 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
         val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         val sd = ShakeDetector(this)
         sd.start(sensorManager)
+
+        bar.setMax(100);
+        bar.setProgress(80);
+
     }
+
 
 
     override fun hearShake() {
