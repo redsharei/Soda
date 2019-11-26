@@ -8,27 +8,38 @@
         tools:context=".MainActivity">
 
 
-    <TextView
-            android:text="SODA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/timeView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:textSize="30sp" android:textColor="#16a2a3"
-            android:layout_marginTop="30dp"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/progress_background"
-            android:id="@+id/progress"
-            android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-    />
-    <Button
-            android:text="Restert"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content" android:id="@+id/Restert" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="112dp"
-            app:layout_constraintHorizontal_bias="0.498" android:background="#009798" android:textColor="#FFFFFF"
-            android:textSize="30sp" app:layout_constraintTop_toBottomOf="@+id/progress"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:text="SODA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/timeView"
+                android:textSize="30sp" android:textColor="#16a2a3"
+                android:layout_marginTop="10dp"
+
+                android:layout_gravity="center_horizontal"/>
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="419dp" app:srcCompat="@drawable/progress_background"
+                android:id="@+id/progress"
+        />
+        <Button
+                android:text="STOP"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" android:id="@+id/stop"
+                android:background="#009798" android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"/>
+        <Button
+                android:text="Restert"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" android:id="@+id/restert"
+                android:background="#009798" android:textColor="#FFFFFF"
+                android:textSize="30sp"
+
+                android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,9 +10,11 @@ import com.squareup.seismic.ShakeDetector
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
-   // val handler = Handler()
+    val handler = Handler()
     var num = 0
-    //var time = 0
+//    var numTime = 0
+    var time = 0
+    var judge = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +28,21 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
      //   bar.setProgress(80)
 
 
-        Restert.setOnClickListener {
+        restert.setOnClickListener {
             num = 0
             progress.setImageLevel(num)
         }
 
+        stop.setOnClickListener {
+            num = num
+            progress.setImageLevel(num)
+            when(judge){
+                false -> {stop.text = "START"
+                    judge = true}
+                else -> {stop.text = "STOP"
+                    judge = false}
+            }
+        }
         progress.setImageResource(R.drawable.progress_background)
         progress.setImageLevel(0)
        // progress.getDrawable().setLevel(500)
@@ -41,7 +53,7 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
 
     override fun hearShake() {
         // やりたい処理を書く
-        /*
+
         val runnable = object : Runnable {
             // メッセージ受信が有った時かな?
             override fun run() {
@@ -53,8 +65,8 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
             }
         }
         handler.post(runnable)
-        if(num==10000)  handler.removeCallbacks(runnable)
-        */
+       // if(num==10000)  handler.removeCallbacks(runnable)
+
 
 
         num += 1000
@@ -62,8 +74,11 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
         Toast.makeText(this@MainActivity, Integer.toString(num), Toast.LENGTH_SHORT).show()
 
     }
+/*
+    fun startTimer(): String{
 
-    /*
+    }
+*/
     private fun timeToText(time: Int = 0): String? {
         return if (time < 0) {
             null                                    // 時刻が0未満の場合 null
@@ -73,9 +88,10 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
             val h = time / 3600
             val m = time % 3600 / 60
             val s = time % 60
+ //           val ss = time
             "%1$02d:%2$02d:%3$02d".format(h, m, s)  // 表示に整形
         }
     }
-    */
+
 
 }
