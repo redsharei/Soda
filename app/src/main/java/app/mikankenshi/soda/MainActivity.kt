@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
 //    var numTime = 0
     var time = 0
     var judge = false
+    var onetime = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,20 +54,22 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
 
     override fun hearShake() {
         // やりたい処理を書く
-
-        val runnable = object : Runnable {
-            // メッセージ受信が有った時かな?
-            override fun run() {
-                time++                      // 秒カウンタ+1
-                timeToText(time)?.let {        // timeToText()で表示データを作り
-                    timeView.text = it            // timeText.textへ代入(表示)
+        if(onetime) {
+            val runnable = object : Runnable {
+                // メッセージ受信が有った時かな?
+                override fun run() {
+                    time++                      // 秒カウンタ+1
+                    timeToText(time)?.let {
+                        // timeToText()で表示データを作り
+                        timeView.text = it            // timeText.textへ代入(表示)
+                    }
+                    handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
                 }
-                handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
             }
+            handler.post(runnable)
+            // if(num==10000)  handler.removeCallbacks(runnable)
+        onetime = false
         }
-        handler.post(runnable)
-       // if(num==10000)  handler.removeCallbacks(runnable)
-
 
 
         num += 1000
@@ -95,3 +98,7 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
 
 
 }
+
+//0.1秒
+//stop
+//ランキング
