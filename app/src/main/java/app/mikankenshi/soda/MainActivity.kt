@@ -2,9 +2,10 @@ package app.mikankenshi.soda
 
 import android.content.Context
 import android.hardware.SensorManager
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Handler
+
+
 import android.widget.Toast
 import com.squareup.seismic.ShakeDetector
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,6 +18,10 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
     var judge = false
     var onetime = true
 
+    lateinit var vb0:Vibrator // Vibratorを宣言
+    //val vbpt0= longArrayOf(0,150,50,150,50,150,50,350,50,350,50,350,50) // Vivratorのパターンを作成
+
+    val vbpt0 = longArrayOf(0,100)
 
     val runnable = object : Runnable {
         // メッセージ受信が有った時かな?
@@ -38,10 +43,16 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
         val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         val sd = ShakeDetector(this)
         sd.start(sensorManager)
-
+        vb0= getSystemService(Context.VIBRATOR_SERVICE) as Vibrator // Vibratorを設定
 
 
         restert.setOnClickListener {
+
+
+            if(vb0.hasVibrator()){
+                vb0run()
+            }
+
             handler.post(runnable)
         }
 /*
@@ -73,6 +84,7 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
                     judge = false
                 }
             }
+            vb0.cancel() // Vibratorを止める
         }
 
         progress.setImageResource(R.drawable.progress_background)
@@ -116,6 +128,13 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
             "%1$02d:%2$02d:%3$02d".format(h, m, s)  // 表示に整形
         }
     }
+    fun vb0run(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){ // Android8.0以降の場合
+            vb0.vibrate(VibrationEffect.createWaveform(vbpt0,0))
+        }else{ // Android8.0未満の場合
+            vb0.vibrate(vbpt0,0)
+        }
+    }
 
 
 }
@@ -124,3 +143,5 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
 //stop
 //ランキング
 //level（ゲージ量）
+//バイブon off
+//振る速度に合わせる
