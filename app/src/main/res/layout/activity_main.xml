@@ -25,21 +25,30 @@
                 android:layout_height="419dp" app:srcCompat="@drawable/progress_background"
                 android:id="@+id/progress"
         />
-        <Button
-                android:text="STOP"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content" android:id="@+id/stop"
-                android:background="#009798" android:textColor="#FFFFFF"
-                android:textSize="30sp"
-                android:layout_gravity="center_horizontal"/>
-        <Button
-                android:text="Restert"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content" android:id="@+id/restert"
-                android:background="#009798" android:textColor="#FFFFFF"
-                android:textSize="30sp"
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="STOP"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content" android:id="@+id/stop"
+                    android:background="#009798" android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:layout_gravity="center_horizontal"/>
+            <Button
+                    android:text="Restert"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content" android:id="@+id/restert"
+                    android:background="#009798" android:textColor="#FFFFFF"
+                    android:textSize="30sp"
 
-                android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView"/>
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

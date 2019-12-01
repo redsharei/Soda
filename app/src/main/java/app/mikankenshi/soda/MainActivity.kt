@@ -1,22 +1,32 @@
 package app.mikankenshi.soda
 
 import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.*
+import android.os.VibrationEffect.DEFAULT_AMPLITUDE
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.squareup.seismic.ShakeDetector
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.properties.Delegates
 
-class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
+
+
+class MainActivity : AppCompatActivity(), ShakeDetector.Listener{
     val handler = Handler()
     var num = 0
-    //    var numTime = 0
     var time = 0
     var judge = false
     var onetime = true
+
+
 
     lateinit var vb0:Vibrator // Vibratorを宣言
     //val vbpt0= longArrayOf(0,150,50,150,50,150,50,350,50,350,50,350,50) // Vivratorのパターンを作成
@@ -31,7 +41,7 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
                 // timeToText()で表示データを作り
                 timeView.text = it            // timeText.textへ代入(表示)
             }
-            handler.postDelayed(this, 10)  // 10ｍｓ後に自分にpost
+            handler.postDelayed(this, 100)  // 10ｍｓ後に自分にpost
         }
     }
 
@@ -43,15 +53,23 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
         val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         val sd = ShakeDetector(this)
         sd.start(sensorManager)
-        vb0= getSystemService(Context.VIBRATOR_SERVICE) as Vibrator // Vibratorを設定
+        vb0 = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator // Vibratorを設定
+
+        OrientationLiveData(this).observe(this, Observer { orientation ->
+
+            if (orientation == null) return@Observer
+
+        //     orientation.azimuth
+         //   textView.text= orientation.pitch.toString()
+          //   orientation.roll
+            // で処理を行う
+        })
+
 
 
         restert.setOnClickListener {
 
 
-            if(vb0.hasVibrator()){
-                vb0run()
-            }
 
             handler.post(runnable)
         }
@@ -95,7 +113,15 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
     override fun hearShake() {
         // やりたい処理を書く
 
+
+        if(vb0.hasVibrator()){
+            vb0run()       //vibrate start
+        }
+
+
         if (onetime) {
+
+
             handler.post(runnable)
             onetime = false
         }
@@ -106,7 +132,6 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
         num += 1000
         progress.setImageLevel(num)
         Toast.makeText(this@MainActivity, Integer.toString(num), Toast.LENGTH_SHORT).show()
-
     }
 
 
@@ -121,18 +146,20 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
             val m = time % 3600 / 60
             val s = time % 60
             */
-            val h = time /3600
-            val m = time % 3600 / 60
-            val s = time % 100
+            val m = time / 60/ 10
+            val s = time /10 % 60
+            val ms = time % 10
 
-            "%1$02d:%2$02d:%3$02d".format(h, m, s)  // 表示に整形
+            "%1$02d:%2$02d:%3$1d0".format(m, s, ms)  // 表示に整形
         }
     }
     fun vb0run(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){ // Android8.0以降の場合
-            vb0.vibrate(VibrationEffect.createWaveform(vbpt0,0))
+           // vb0.vibrate(VibrationEffect.createWaveform(vbpt0,0))
+            vb0.vibrate(VibrationEffect.createOneShot(300, DEFAULT_AMPLITUDE))
         }else{ // Android8.0未満の場合
-            vb0.vibrate(vbpt0,0)
+           // vb0.vibrate(vbpt0,0)
+            vb0.vibrate(100)
         }
     }
 
@@ -144,4 +171,7 @@ class MainActivity : AppCompatActivity(), ShakeDetector.Listener {
 //ランキング
 //level（ゲージ量）
 //バイブon off
-//振る速度に合わせる
+//振る速度に合わせる（加速度せんさー実装したい中）
+// 多重継承
+//インターフェスにしたんだけど、呼び出せない。
+//スタート画面
