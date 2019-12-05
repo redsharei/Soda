@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Soda</string>
+    <string name="sample_text">"\n\n\n\n\n\n　　こんにちは　　　　　　　\n\n　　このアプリはただ振るだけの\n　　簡単なゲームです\n\n　　振ることを楽しむもよし\n\n　　日頃の鬱憤をはらすもよし\n\n　　気の向くまま振ってください"</string>
+
+    <string name="sample2_text">\n　　　　時々ビンが一杯になった時の\n　　音が変わります\n　　レアな音なので\n　　ぜひ探してみてください"</string>
 </resources>
