@@ -8,7 +8,7 @@
         tools:context=".StartActivity" android:background="#F0EFEF">
 
     <TextView
-            android:text="Shake What"
+            android:text="Shake SODA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView2" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintTop_toTopOf="parent"

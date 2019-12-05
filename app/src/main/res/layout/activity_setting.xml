@@ -5,11 +5,61 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SettingActivity" android:background="#F0EFEF">
+        tools:context=".SettingActivity" android:background="#F0EFEF" android:onClick="back">
 
+    <TextView
+            android:text="タップで閉じる"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView18" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="12sp" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="305dp"/>
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="0dp" android:id="@+id/linearLayout3" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:id="@+id/textView11" android:layout_weight="1"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/textView14" android:layout_weight="1"/>
+            <Switch
+                    android:text="  音"
+                    android:layout_width="92dp"
+                    android:layout_height="60dp" android:id="@+id/switch1" android:layout_weight="1"
+                    android:background="#FFFFFF" android:textSize="18sp" android:checked="true"
+                    android:textColorHighlight="#7795ff" android:textColorLink="#3d68d0" android:onClick="sound"/>
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/textView15" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:layout_weight="1">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView16" android:layout_weight="1"/>
+            <Switch
+                    android:text="  振動"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp" android:id="@+id/switch2" android:layout_weight="1"
+                    android:background="#FFFFFF" android:textSize="18sp" android:checked="true"
+                    android:textColorHighlight="#7795ff" android:textColorLink="#3d68d0"
+                    android:textCursorDrawable="@color/colorAccent"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView17" android:layout_weight="1"/>
+        </LinearLayout>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:id="@+id/textView12" android:layout_weight="1"/>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

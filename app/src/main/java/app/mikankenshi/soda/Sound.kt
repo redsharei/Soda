@@ -82,6 +82,13 @@ class Sound constructor(context: Context) {
         }
     }
 
+    fun unload(soundID:Int) {
+        soundPool?.let{
+            it.unload(soundID)
+        }
+    }
+
+
     fun playSoundLoop(soundID:Int) {
         soundPool?.let{
             //再生テスト
