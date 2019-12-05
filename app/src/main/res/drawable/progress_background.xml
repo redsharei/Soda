@@ -1,0 +1,11 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <bitmap android:src="@drawable/ic_launcher_bw"/>
+    </item>
+    <item>
+        <clip
+                android:clipOrientation="vertical"
+                android:gravity="bottom"
+                android:drawable="@drawable/ic_launcher"/>
+    </item>
+</layer-list>
